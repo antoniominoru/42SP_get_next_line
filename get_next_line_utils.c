@@ -6,7 +6,7 @@
 /*   By: aminoru- <aminoru-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 17:00:29 by aminoru-          #+#    #+#             */
-/*   Updated: 2022/05/11 18:34:26 by aminoru-         ###   ########.fr       */
+/*   Updated: 2022/05/11 20:13:16 by aminoru-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 		j++;
 	return (j);
 }
-
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
