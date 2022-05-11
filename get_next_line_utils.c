@@ -6,7 +6,7 @@
 /*   By: aminoru- <aminoru-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 17:00:29 by aminoru-          #+#    #+#             */
-/*   Updated: 2022/05/10 22:22:44 by aminoru-         ###   ########.fr       */
+/*   Updated: 2022/05/11 16:04:02 by aminoru-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,21 @@ char	*ft_strchr(const char *s, int c)
 	char	ch;
 
 	ch = (unsigned char)c;
-	if (!s) // add
-		return (0);  // add
-	while (*s != '\0' && ch != *s)
+	if (!s)
+		return (0);
+	while (*s != '\0' && *s != ch)
 		s++;
-	if (ch == *s)
+	if (*s == ch)
 		return ((char *)s);
 	return (0);
 }
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+void	ft_strlcpy_2(char *dest, const char *src, size_t size)
 {
 	size_t	i;
-	size_t	j;
 
 	if (!dest || !src)
-		return (0);
+		return ;
 	i = -1;
 	if (size)
 	{
@@ -40,10 +39,6 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 			dest[i] = src[i];
 		dest[i] = '\0';
 	}
-	j = 0;
-	while (src[j])
-		j++;
-	return (j);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -63,8 +58,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	s3 = malloc((len_s1 + len_s2 + 1) * sizeof(char));
 	if (!s3)
 		return (NULL);
-	ft_strlcpy(&s3[0], s1, len_s1 + 1);
-	ft_strlcpy(&s3[len_s1], s2, len_s2 + 1);
+	ft_strlcpy_2(&s3[0], s1, len_s1 + 1);
+	ft_strlcpy_2(&s3[len_s1], s2, len_s2 + 1);
 	return (s3);
 }
 
@@ -108,6 +103,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		substr = malloc((strlen_s - start + 1) * sizeof(char));
 	if (!substr)
 		return (NULL);
-	ft_strlcpy(substr, (s + start), (len + 1));
+	ft_strlcpy_2(substr, (s + start), (len + 1));
 	return (substr);
 }

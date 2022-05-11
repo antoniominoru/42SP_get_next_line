@@ -6,7 +6,7 @@
 /*   By: aminoru- <aminoru-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 17:00:36 by aminoru-          #+#    #+#             */
-/*   Updated: 2022/05/10 23:11:09 by aminoru-         ###   ########.fr       */
+/*   Updated: 2022/05/11 15:13:55 by aminoru-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,16 @@ ssize_t	read_file(int fd, char **buffer, char **statch, char **line)
 {
 	char	*tmp;
 	ssize_t	n;
+	int		flag;
 
 	n = 1;
-	while (!ft_strchr(*statch, '\n') && n)
+	flag = 1;
+	while (flag && n)
 	{
 		n = read(fd, *buffer, BUFFER_SIZE);
-		(*buffer)[n] = '\0'; // recall
+		(*buffer)[n] = '\0';
+		if (ft_strchr(*buffer, '\n'))
+			flag = 0;
 		tmp = *statch;
 		*statch = ft_strjoin(tmp, *buffer);
 		free(tmp);
@@ -81,5 +85,5 @@ char	*get_next_line(int fd)
 	n = read_file(fd, &buffer, &statch, &line);
 	if (n && !line)
 		return (NULL);
-	return (line);	
+	return (line);
 }
