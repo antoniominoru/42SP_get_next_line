@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aminoru- <aminoru-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/06 17:00:36 by aminoru-          #+#    #+#             */
-/*   Updated: 2022/05/11 18:21:57 by aminoru-         ###   ########.fr       */
+/*   Created: 2022/05/11 18:37:54 by aminoru-          #+#    #+#             */
+/*   Updated: 2022/05/11 19:58:41 by aminoru-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*split_line(char **statch, char **line)
 {
@@ -65,12 +65,12 @@ ssize_t	make_line(int fd, char **buffer, char **statch, char **line)
 
 char	*get_next_line(int fd)
 {
-	static char	*statch;
+	static char	*statch[10];
 	char		*buffer;
 	char		*line;
 	ssize_t		n;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 10)
 		return (NULL);
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
@@ -80,9 +80,9 @@ char	*get_next_line(int fd)
 		free(buffer);
 		return (NULL);
 	}
-	if (!statch)
-		statch = ft_strdup("");
-	n = make_line(fd, &buffer, &statch, &line);
+	if (!statch[fd])
+		statch[fd] = ft_strdup("");
+	n = make_line(fd, &buffer, &statch[fd], &line);
 	if (n && !line)
 		return (NULL);
 	return (line);
